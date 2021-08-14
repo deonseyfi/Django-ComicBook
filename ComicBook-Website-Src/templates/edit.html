@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container bg-dark">
+    <li class="list-group bg-allen text-secondary">
+        <h1>Edit Profile</h1>
+    </li>
+    <form method="post">
+        {% csrf_token %}
+        <p>Username: {{ form.username }}</p>
+        <p>First Name: {{ form.first_name }}</p>
+        <p>Last Name Name: {{ form.last_name }}</p>
+        <p>Email: {{ form.email }}</p>
+        <a class="p-0 btn text-secondary" href="/myprofile/edit/changepw">Change Password</a>
+        <!-- Upload New Prof Pic // not working :(
+        <br><br>
+        <a class="p-0 btn text-secondary" href="/myprofile/edit/uploadprofpic">Change Profile Picture</a>
+        -->
+        <br><br>
+        <button type="submit" class="btn btn-secondary">Save</button>
+        <br><br>
+    </form>
+</div>
+
+
+{% endblock %}

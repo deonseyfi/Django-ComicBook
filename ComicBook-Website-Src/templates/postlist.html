@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-1 m-0">
+    <div class="container">
+      <div class="row">
+          <div class="col-md-4"></div>
+        <div class="col-md-5">
+
+        {% if post_list %}
+
+        {% for post in post_list %}
+        <li class="list-group-item bg-allen">
+
+        <div class="row article col-12">
+
+        <a class="m-1 p-1" href="post/{{ post.postid }}" style="color:#2E9AFE">
+        <strong class="text-center text-light" style="background-color: rgb(46, 154, 254, .5); font-size: 25px; display: inline !important;">{{post.title}}</strong>
+        <p><i>By {{post.user.username}}</i> - <i> {{ post.date.date }} </i>  </p>
+        </a>
+
+        <a href="post/{{ post.postid }}">
+        {% if post.image %}
+         <img class="align-center position-relative img-thumbnail" width="300" src="{{ MEDIA_URL}}{{post.image}}">
+        {% endif %}
+        </a>
+
+        </div>
+        </li>
+        {% endfor %} {% else %}
+        <p>No posts returned from database.</p>
+        {% endif %}
+
+    </ul>
+  </div>
+
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+{% endblock %}

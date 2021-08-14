@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="py-1">
+
+
+
+  <div class="container bg-dark">
+      <br>
+
+
+      <div class="row">
+        <div class="col-md-6">
+          <img class="img-thumbnail img-responsive" src={{ MEDIA_URL }}{{ cover }} alt="Comic cover.">
+            <br><br>
+        </div>
+        <div class="col-sm-6">
+          <ul class= " list-group list-group-flush" >
+
+          <div class="text-right">
+          {% if user.is_authenticated %}
+            {% if is_fav %}
+                <form method="post" action={{ request.path}}>
+                {% csrf_token %}
+                {{ fav_comic_form }}
+                <!-- favorited -->
+                <button type="submit" class="btn btn-pink fa fa-heart" ></button>
+                </form>
+            {% else %}
+                <form method="post" action={{ request.path }}>
+                {% csrf_token %}
+                {{ fav_comic_form }}
+                <!-- favorite -->
+                <button type="submit" class="btn btn-secondary fa fa-heart-o"></button>
+                </form>
+            {% endif %}
+          {% endif %}
+          <br>
+          </div>
+
+            <li class="list-group-item"><h5 >Title</h5><p>{{ title }}</p></li>
+            <li class="list-group-item"><h5 >Author</h5><p>{{ author }}</p></li>
+            <li class="list-group-item"><h5 >Publisher</h5><p>{{ publisher }}</p></li>
+            <li class="list-group-item"><h5 >Genre</h5><p>{{ genre }}</p></li>
+            <li class="list-group-item"><h5 >Series</h5><p>{{ series }}</p></li>
+            <li class="list-group-item"><h5 >Volume</h5><p>{{ volume }}</p></li>
+            <li class="list-group-item"><h5 >Issue </h5><p>{{ issue }}</p></li>
+          </ul>
+        </div>
+      </div>
+          <ul class="list-group list-group-flush ">
+            <!--<li class="list-group-item"><h3>Synopsis</h3><p>{{ synopsis }}</p></li>-->
+            <li class="list-group-item"><h3>Plot</h3><button class="btn btn-danger dropdown-toggle" onclick= "showContent()">Spoiler Alert!</button>
+		<div id="plot" ><p> {{ plot|safe }} </p> </div>
+        <script>
+		var content = document.getElementById("plot");
+		
+		content.style.display = "none";
+		function showContent(){
+			if (content.style.display === "none"){
+				content.style.display = "block";
+			}
+			else {
+				content.style.display = "none";
+			}
+		}
+            </script>
+            <li class="list-group-item"><h3>Rating</h3><p>{{ rating }}/5 {% if user.is_authenticated %}
+                                                                         {% if user_rating %}
+                                                                          You gave this comic a {{ user_rating }}
+                                                                         {% else %}
+                                                                          You have not rated this comic yet.
+                                                                         {% endif %}
+                                                                              <form id="rating_form" method="post" action="{{ request.path }}">
+                                                                              {% csrf_token %}
+                                                                              {% for field in ratingform.visible_fields %}
+                                                                                {{ field.errors }}
+                                                                                {{ field.help_text }}
+                                                                                {{ field }}
+                                                                              {% endfor %}
+                                                                              <input type="submit" class="btn btn-warning" name="rating_submit" value="rate">
+                                                                              </form>
+                                                                              {% endif %}</p>
+              <br>
+            </li>
+          </ul>
+      <br>
+          <div>
+            {% if comments %}
+              {% for comment_dict in comments %}
+              <a href="{{ comment_dict.link }}"><strong>{{ comment_dict.user }}</strong></a> on {{ comment_dict.date }} commented:<br>
+              {{ comment_dict.comment_text }}<br><br>
+            {% endfor %}
+            {% else %}
+              <strong> There are no comments yet. </strong>
+            {% endif %}
+          </div>
+          {% if user.is_authenticated %}
+          <div>
+            <form id="comment_form" method="post" action="{{ request.path }}">
+                {% csrf_token %}
+                {% for field in commentform.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                <div class="col-md-3 offset-md-0">
+                    {{ field }}
+                </div>
+                <br>
+                {% endfor %}
+                <div class="col-md-3 offset-md-0">
+                <input type="submit" class="btn btn-secondary" name="submit" value="Post Comment" />
+                </div>
+            </form>
+          </div>
+          {% endif %}
+      <br>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

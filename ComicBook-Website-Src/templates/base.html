@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- PAGE settings -->
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>TiltedComics</title>
+  <meta name="description" content="Wireframe design of a product display by Pingendo">
+  <meta name="keywords" content="Pingendo bootstrap example template wireframe product">
+  <meta name="author" content="Pingendo">
+  <!-- CSS dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <!-- {% load static %} -->
+  <link rel="stylesheet" href="{% static 'site/wireframe.css' %}">
+ </head>
+
+<body>
+{% if request.user.is_authenticated %}
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
+    <a href="/"><img src="{{ MEDIA_URL }}logo.png" width="258" height="63" alt="TiltedComics" /></a>
+        <a class="p-2 text-secondary" href="/comiclist">Comics
+          <br> </a>
+        <a class="p-2 text-secondary" href="/postlist">News
+	  <br> </a>
+        <a class="p-2 text-secondary" href="/createpost">Create Post
+          <br> </a>
+           <a class="p-2 text-secondary">
+          <br> </a>
+           <a class="p-2 text-secondary">
+          <br> </a>
+          <audio id="FORTS" src="{{MEDIA_URL}}cover/FORTS.mp3" preload="auto"></audio>
+          <button onclick="document.getElementById('FORTS').play();" class="btn primary btn-outline-deagen">HYPE</button>
+        <div class="collapse navbar-collapse text-center justify-content-end" id="navbarDarkSupportedContent">
+          <ul class="navbar-nav"></ul>
+          <form class="form-inline my-2 my-lg-0" action="/searchpage" method="get">
+            <input class="form-control mr-sm-2" type="search" name="q" placeholder="" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">Search</button>
+          </form>
+        </div>
+        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="/myprofile"><i class="fa d-inline fa-lg fa-user-circle-o fa-bold ml-1"> {{ request.user.username }} </i>&nbsp;</a>
+        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="/loggedout">Log Out&nbsp;</a>
+        <a class="p-2 text-secondary"></a>
+          <br> </a>
+      </div>
+  </nav>
+{% endif %}
+
+{% if not request.user.is_authenticated %}
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+    <a href="/"><img src="{{ MEDIA_URL }}logo.png" width="258" height="63" alt="TiltedComics" /></a>
+      <div class="collapse navbar-collapse text-center justify-content-between" id="navbar3SupportedContent">
+        <a class="p-2 text-secondary" href="/comiclist">Comics
+          <br> </a>
+        <a class="p-2 text-secondary" href="/postlist">News
+          <br> </a>
+          <div class="collapse navbar-collapse text-center justify-content-end" id="navbarDarkSupportedContent">
+            <ul class="navbar-nav"></ul>
+            <form class="form-inline my-2 my-lg-0" action="/searchpage/" method="get">
+              <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">Search</button>
+            </form>
+          </div>
+        <a class="p-2 btn text-secondary" href="/register">Register</a>
+        <a class="p-2 btn text-secondary" href="/login">Sign In&nbsp;</a>
+          <br> </a>
+      </div>
+    </div>
+  </nav>
+{% endif %}
+
+
+  {% block content %}
+  <!-- insert code for other pages here in another html file -->
+  {% endblock %}
+
+  <br><br><br><br><br><br><br>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

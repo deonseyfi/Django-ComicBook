@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="p-1 m-0">
+    <div class="container">
+      <div class="row">
+          <div class="col-md-1"></div>
+        <div class="col-md-5">
+          <div class="card">
+            {% if user.userprofile.profpic %}
+                <img class="img-thumbnail" src="{{ user.userprofile.profpic.url }}">
+            {% else %}
+                <img class="img-thumbnail" src="https://myspace.com/common/images/user.png">
+            {% endif %}
+          </div>
+            <br>
+            <a class="btn navbar-btn text-white btn-secondary" href="/myprofile/edit">Edit Account Info</a>
+        </div>
+        <div class="col-md-5">
+          <li class="list-group-item bg-dark text-secondary">Username: {{ user.username }}
+            <br> </li>
+          <li class="list-group-item bg-dark text-secondary">First Name: {{ user.first_name }}</li>
+          <li class="list-group-item bg-dark text-secondary">Last Name: {{ user.last_name }}</li>
+          <li class="list-group-item bg-dark text-secondary">Email: {{ user.email }}</li>
+          <div class="row">
+            <div class="col-md-12"></div>
+          </div>
+<br>
+
+<!-- FAVORITE LIST -->
+      {% if fav_list %}
+
+<div class="container bg-info bg-allen">
+    <div class="row no-gutters">
+      <div class="text-secondary bg-allen">
+        <ul class="list-group-flush container-fluid">
+            <li class="list-group-item bg-allen text-secondary">
+                <h3>Favorite Comics</h3>
+            </li>
+         {% for fav in fav_list %}
+            <a href="/comic/{{fav.comicid}}"><li class="list-group-item bg-dark">{{fav.comictitle}} Vol.{{fav.comicvolume}} I.{{fav.comicissue}} </a></li>
+         {% endfor %}
+      {% endif %}
+        </ul>
+      </div>
+    </div>
+</div>
+
+<br>
+
+<!-- FOLLOW LIST -->
+  {% if follow_list %}
+<div class="container bg-info bg-allen">
+    <div class="row no-gutters">
+      <div class="text-secondary bg-allen">
+        <ul class="list-group-flush container-fluid">
+            <li class="list-group-item bg-allen text-secondary">
+                <h3>Following</h3>
+            </li>
+     {% for fol in follow_list %}
+       <a href="/user/{{fol.following}}"><li class="list-group-item bg-dark">{{fol.following}}</a></li>
+     {% endfor %}
+  {% endif %}
+        </ul>
+      </div>
+    </div>
+</div>
+
+<br>
+
+<!-- POST LIST -->
+  {% if timeline_posts %}
+<div class="container bg-info bg-allen">
+    <div class="row no-gutters">
+      <div class="text-secondary bg-allen">
+        <ul class="list-group-flush container-fluid">
+            <li class="list-group-item bg-allen text-secondary">
+                <h3>Posts Timeline</h3>
+            </li>
+    {% for post in timeline_posts %}
+      {% if post.userid %}
+        {% if post.type == 'post' %}
+        <a href ="/post/{{post.pageid}}"> <li class = "list-group-item bg-dark">{{post.text}} </a></li>
+        {% else %} 
+        <a href ="/comic/{{post.pageid}}"> <li class = "list-group-item bg-dark">{{post.text}} </a></li>
+        {% endif %}
+      {% else %}
+        <a href = "/post/{{post.postid}}"> <li class="list-group-item bg-dark">{{post.title}} - {{ post.user.username }}  </a></li>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+        </ul>
+      </div>
+    </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+
+{% if not user.is_authenticated %}
+<div class="col-md-9 offset-md-4" >
+  <h1 class="text-center">Please login to view your profile.</h1>
+</div>
+{% endif %}
+
+{% endblock %}

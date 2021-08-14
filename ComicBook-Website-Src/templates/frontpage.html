@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container bg-info bg-allen">
+<div class="row no-gutters">
+  <!-- News Feed --> 
+  <div class="col-8 col-sm-6 col-md-8 text-secondary bg-allen">
+    <ul class="list-group-flush container-fluid">
+
+        {% if post_list %} 
+        
+        {% for post in post_list %}
+        <li class="list-group-item bg-allen">
+
+        <div class="row article">
+          
+        <a class="m-1 p-1" href="post/{{ post.postid }}" style="color:#2E9AFE">
+        <strong class="text-center text-light" style="background-color: rgb(46, 154, 254, .5); font-size: 25px; display: inline !important;">{{post.title}}</strong>
+        <p><i>By {{post.user.username}}</i> - <i> {{ post.date.date }} </i>  </p>
+        </a>
+
+        <a href="post/{{ post.postid }}">
+        {% if post.image %}
+         <img class="align-center position-relative img-thumbnail" height="200" src="{{ MEDIA_URL}}{{post.image}}">
+        {% endif %}
+        </a>
+
+        </div>
+        </li>
+        {% endfor %} {% else %}
+        <p>No posts returned from database.</p>
+        {% endif %}
+        
+    </ul>
+  </div>
+<!-- End News Feed -->
+
+<!-- Comic List -->
+<div class="text-center col-6 col-md-4">
+    <br>
+<ul class="nav nav-tabs">
+  <li class="nav-item col-6">
+    <a href="#home" class="nav-link active bg-dark text-secondary" aria-controls="home" aria-selected="true" data-toggle="tab" id="home-tab" role="tab">Popular Comics</a>
+  </li>
+  <li class="nav-item col-6">
+    <a class="nav-link bg-dark text-secondary" href="#profile" aria-controls="profile" aria-selected="false" data-toggle="tab" id="profile-tab" role="tab">Recent Comics</a>
+  </li>
+</ul>
+<div class="tab-content my-2" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <ul id="popular" class="list-group">
+         {% for c in comic %}
+        <li class="list-group-item bg-allen">
+        <div class="container">
+        <a href="comic/{{ c.comicid }}">
+          <img class="align-center position-relative" height="450" src="{{ MEDIA_URL }}{{ c.comiccover}}">
+  
+          <br><br>
+  
+          <a class="position-absolute fixed-bottom py-1 col-md-10 offset-md-1" style="background-color: rgb(46, 154, 254, .9);" href="comic/{{ c.comicid }}" style="color:#2E9AFE">
+            <strong class="text-light">{{ c.comictitle }} Vol. {{ c.comicvolume }} Issue {{ c.comicissue }}</strong>
+          </a>
+  
+        </a>
+        </div>
+        </li>
+          <br><br>
+        {% endfor %}
+      </ul>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <ul id="recent" class="list-group">
+         {% for c in recent_comic %}
+        <li class="list-group-item bg-allen">
+        <div class="container">
+        <a href="comic/{{ c.comicid }}">
+          <img class="align-center position-relative" height="450" src="{{ MEDIA_URL }}{{ c.comiccover}}">
+  
+          <br><br>
+  
+          <a class="position-absolute fixed-bottom py-1 col-md-10 offset-md-1" style="background-color: rgb(46, 154, 254, .5);" href="comic/{{ c.comicid }}" style="color:#2E9AFE">
+            <strong class="text-light">{{ c.comictitle }}</strong>
+          </a>
+        </a>
+        </div>
+        </li>
+          <br><br>
+        {% endfor %}
+      </ul>
+  
+   
+  </div>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- End Comic List -->
+{% endblock %}

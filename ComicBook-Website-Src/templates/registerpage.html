@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="py-5">
+    <div class="container-fluid col-md-3 offset-md-5 bg-dark text-secondary">
+          <form class="" id ="create_account" method="post" enctype="multipart/form-data" style="opacity: 1;">
+            <h1 class="" >Sign Up</h1>
+            {% csrf_token %}
+            {% for field, errors in user_form.errors.items %}
+                {% for error in errors %}
+                <ul>
+                 <li>{{ error }} </li>
+                </ul>
+                {% endfor %}
+            {% endfor %} 
+            {{ user_form.username }} <br>
+            {{ user_form.first_name }} <br>
+            {{ user_form.last_name }} <br>
+            {{ user_form.email }} <br>
+            {{ user_form.password }} <br>
+
+            {{ profile_form.usercity }} <br>
+            <p class="" >Upload Profile Pic:</p>
+            {{ profile_form.profpic }} <br> <br>
+
+            <button type="submit" class="btn btn-secondary">Create Account
+            <br> </button>
+            <br>
+            <br>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

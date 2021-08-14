@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container-fluid col-md-6 bg-dark text-secondary">
+    <article>
+    <h1>{{ title }}</h1>
+    <h6><i>By {{ user }} {{ date.date }}</i></h6>
+    <div class="align-center">
+    {% if image %}
+    	<img class="img-thumbnail align-center" src="{{ image.url }}">
+        <br>
+    {% endif %}
+    </div>
+    <br> 
+    {{ text|safe }}
+    <br><br>
+    </article>
+    <div>
+      {% if comments %}
+        {% for comment_dict in comments %}
+          <a href="{{ comment_dict.link }}"><strong>{{ comment_dict.user }}</strong></a> on {{ comment_dict.date }} commented:<br>
+          {{ comment_dict.comment_text }}<br><br>
+        {% endfor %}
+      {% else %}
+        <strong> There are no comments yet. </strong>
+      {% endif %}
+    </div>
+    {% if request.user.is_authenticated %}
+    <div>
+      <form id="comment_form" method="post" action="{{ request.path }}">
+        {% csrf_token %}
+        {% for field in commentform.visible_fields %}
+          {{ field.errors }}
+          {{ field.help_text }}
+          {{ field }} <br>
+        {% endfor %}
+        <input type="submit" name="submit" value="Post Comment">
+      </form>
+    </div>
+    {% endif %}
+  </div>
+<br><br>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="text-center">
+    <div class="container-fluid">
+      <div class="container-fluid col-md-2 offset-md-5 bg-dark text-secondary">
+	    <h1>Comic List</h1>
+      </div>
+    <div class="py-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="btn-group align-center">
+        <a href="/comiclist" class="btn btn-primary bg-dark text-secondary">All</a>
+        <a href="A" class="btn btn-primary bg-dark text-secondary">A</a>
+        <a href="B" class="btn btn-primary bg-dark text-secondary">B</a>
+        <a href="C" class="btn btn-primary bg-dark text-secondary">C</a>
+        <a href="D" class="btn btn-primary bg-dark text-secondary">D</a>
+        <a href="E" class="btn btn-primary bg-dark text-secondary">E</a>
+        <a href="F" class="btn btn-primary bg-dark text-secondary">F</a>
+        <a href="G" class="btn btn-primary bg-dark text-secondary">G</a>
+        <a href="H" class="btn btn-primary bg-dark text-secondary">H</a>
+        <a href="I" class="btn btn-primary bg-dark text-secondary">I</a>
+        <a href="J" class="btn btn-primary bg-dark text-secondary">J</a>
+        <a href="K" class="btn btn-primary bg-dark text-secondary">K</a>
+        <a href="L" class="btn btn-primary bg-dark text-secondary">L</a>
+        <a href="M" class="btn btn-primary bg-dark text-secondary">M</a>
+        <a href="N" class="btn btn-primary bg-dark text-secondary">N</a>
+        <a href="O" class="btn btn-primary bg-dark text-secondary">O</a>
+        <a href="P" class="btn btn-primary bg-dark text-secondary">P</a>
+        <a href="Q" class="btn btn-primary bg-dark text-secondary">Q</a>
+        <a href="R" class="btn btn-primary bg-dark text-secondary">R</a>
+        <a href="S" class="btn btn-primary bg-dark text-secondary">S</a>
+        <a href="T" class="btn btn-primary bg-dark text-secondary">T</a>
+        <a href="U" class="btn btn-primary bg-dark text-secondary">U</a>
+        <a href="V" class="btn btn-primary bg-dark text-secondary">V</a>
+        <a href="W" class="btn btn-primary bg-dark text-secondary">W</a>
+        <a href="X" class="btn btn-primary bg-dark text-secondary">X</a>
+        <a href="Y" class="btn btn-primary bg-dark text-secondary">Y</a>
+        <a href="Z" class="btn btn-primary bg-dark text-secondary">Z</a>
+      </div>
+    </div>
+  </div>
+  <br>
+
+    {% if comic_list %}
+    <ul class="list-group col-md-4 offset-md-4">
+
+	{% for comic in comic_list %}
+	    <a href = "/comic/{{ comic.comicid }}" class="list-group-item list-group-item-action bg-dark text-secondary" >{{ comic.comictitle }} V.{{ comic.comicvolume }} I.{{ comic.comicissue }}</a>
+	{% endfor %}
+
+    </ul>
+    {% else %}
+	<p>No comic returned from database.</p>
+    {% endif %}
+     </div>
+    </div>
+  </div>
+{% endblock %}

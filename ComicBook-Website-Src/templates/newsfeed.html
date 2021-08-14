@@ -1,0 +1,22 @@
+<!-- News Feed -->
+<div class="col mx-2 pt-5 px-5 bg-dark mb-3">
+      <div class="text-center">
+        <div class="container-fluid">
+        <h1>News Feed</h1>
+        <div class="card">
+
+        {% if post_list %}
+
+        {% for post in post_list %}
+            <a href = "post/{{ post.postid }}" class="list-group-item list-group-item-action" >{{ post.title }} | {{ post.date }}</a>
+        {% endfor %}
+
+        {% else %}
+        <p>No posts returned from database.</p>
+        {% endif %}
+
+         </div>
+        </div>
+      </div>
+</div>
+<!-- End News Feed -->

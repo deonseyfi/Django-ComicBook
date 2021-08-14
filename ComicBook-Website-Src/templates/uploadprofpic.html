@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container bg-dark">
+    <li class="list-group bg-allen text-secondary">
+        <h1>Edit Profile</h1>
+    </li>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>Upload New Profile Picture:</p>
+        <p>{{ form.profpic }}</p>
+        <button type="submit" class="btn btn-secondary">Save</button>
+        <br><br>
+    </form>
+</div>
+
+
+{% endblock %}

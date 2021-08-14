@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="container-fluid col-md-6 offset-md-3 bg-dark text-secondary">
+    <br>
+ <div>
+    <h1 align="center">Search Results</h1>
+
+    <ul class="list-group">
+    {% if result_listUser %}
+     <!-- Display search results in an ordered list -->
+         <div class="list-group">
+		 <h3>Users ({{result_listUser|length}}):</h3>
+         {% for result in result_listUser %}
+             <div class="list-group-item bg-dark">
+                 <h5 class="list-group-item-heading"></h5>
+                     <a href = "/user/{{ result.username }}" class="btn btn-warning">{{ result.username}}</a>
+                     <!-- <p class="list-group-item-text">{{ result.comicid}}</p> -->
+             </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+          </ul>
+  </div>
+
+<!-- SEARCH BY TITLE -->
+{% if result_listComicTitle %}
+  <div class="py-1">
+   <h3>Comics ({{result_listComicTitle|length}}):</h3>
+      {% for result in result_listComicTitle %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="">
+              <ul class="">
+                  <ul class="">
+                      <ul class="">
+                          <ul class="">
+            <a href = "/comic/{{ result.comicid }}" class="list-group-item list-group-item-action bg-dark text-secondary ">
+            <img class="img-thumbnail bg-dark" src="{{MEDIA_URL}}{{result.comiccover}}"></a>
+                          </ul>
+                      </ul>
+                  </ul>
+              </ul>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="nav nav-pills flex-column"></ul>
+            <br><br><br>
+            <a href = "/comic/{{ result.comicid }}" class="list-group-item list-group-item-action bg-dark text-secondary ">
+                <h4>{{ result.comictitle }} Vol.{{ result.comicvolume}} I.{{result.comicissue}} </h4></a>        
+          </div>
+          {% endfor %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+
+<!-- SEARCH BY SERIES -->
+{% if result_listSeries %}
+  <div class="py-1">
+   <h3>Series ({{result_listSeries|length}}):</h3>
+      {% for result in result_listSeries %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="">
+              <ul class="">
+                  <ul class="">
+                      <ul class="">
+                          <ul class="">
+            <a href = "/comic/{{ result.comicid }}" class="list-group-item list-group-item-action bg-dark text-secondary ">
+            <img class="img-thumbnail bg-dark" src="{{MEDIA_URL}}{{result.comiccover }}"></a>
+                          </ul>
+                      </ul>
+                  </ul>
+               </ul>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="nav nav-pills flex-column"></ul>
+            <br><br><br><br>
+            <a href = "/comic/{{ result.comicid }}" class="list-group-item list-group-item-action bg-dark text-secondary ">
+                <h4>{{ result.comictitle }} Vol.{{ result.comicvolume}} I.{{result.comicissue}} </h4></a>
+        </div>
+          {% endfor %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+
+<!-- SEARCH BY PUBLISHER -->
+<div class="container-fluid col-md-6 offset-md-3 bg-dark text-secondary">
+{% if result_listPublisher %}
+  <div class="py-1">
+   <h3>Publisher ({{result_listPublisher|length}}):</h3>
+      {% for result in result_listPublisher %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="">
+              <ul class="">
+                  <ul class="">
+                      <ul class="">
+                          <ul class="">
+            <a href = "/comic/{{ result.comicid }}" class="list-group-item list-group-item-action bg-dark text-secondary ">
+            <img class="img-thumbnail bg-dark" src="{{MEDIA_URL}}{{result.comiccover }}"></a>
+                          </ul>
+                      </ul>
+                  </ul>
+              </ul>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="nav nav-pills flex-column"></ul>
+            <br><br><br><br>
+            <a href = "/comic/{{ result.comicid }}" class="list-group-item list-group-item-action bg-dark text-secondary ">
+                <h4>{{ result.comictitle }} Vol.{{ result.comicvolume}} I.{{result.comicissue}} </h4></a>
+        </div>
+          {% endfor %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH BY AUTHOR -->
+{% if result_listAuthor %}
+<div class="container-fluid col-md-6 offset-md-3 bg-dark text-secondary">
+  <div class="py-1">
+   <h3>Author ({{result_listAuthor|length}}):</h3>
+      {% for result in result_listAuthor %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="">
+              <ul class="">
+                  <ul class="">
+                      <ul class="">
+                          <ul class="">
+            <a href = "/comic/{{ result.comicid }}" class="list-group-item list-group-item-action bg-dark text-secondary ">
+            <img class="img-thumbnail bg-dark" src="{{MEDIA_URL}}{{result.comiccover }}"></a>
+                          </ul>
+                      </ul>
+                  </ul>
+               </ul>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="nav nav-pills flex-column"></ul>
+            <br><br><br><br>
+            <a href = "/comic/{{ result.comicid }}" class="list-group-item list-group-item-action bg-dark text-secondary ">
+                       <h4>{{ result.comictitle }} Vol.{{ result.comicvolume}} I.{{result.comicissue}} </h4></a>
+         </div>
+          {% endfor %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

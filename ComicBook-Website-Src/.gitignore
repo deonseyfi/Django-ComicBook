@@ -1,0 +1,7 @@
+#[File Types]
+*.pyc
+
+#[Folders]
+venv/
+static/site/
+comicsite/migrations

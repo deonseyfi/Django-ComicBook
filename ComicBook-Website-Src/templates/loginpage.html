@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="py-5">
+    <div class="container-fluid col-md-3 offset-md-5 bg-dark text-secondary">
+        <div class="align-center">
+          <form class="align-center" id ="login_form" method="post" style="opacity: 1;">
+            <h3 class="" >Stay awhile and listen.ᶘಠᴥಠᶅ</h3>
+            {% csrf_token %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            <input type="text" name="username" class="form-control" placeholder="Username"/>
+            <br>
+            <input type="password" name="password" class="form-control" placeholder="Password"/>
+            <br>
+
+            <button type="submit" class="btn btn-secondary">Login
+              <br> </button>
+              <br><br>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

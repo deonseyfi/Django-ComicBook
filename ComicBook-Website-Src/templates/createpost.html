@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated and user.is_staff %}
+<div class="py-5">
+    <div class="container-fluid col-md-3 offset-md-4 bg-dark text-secondary">
+      <div class="row">
+        <div class="col-md-12">
+          <form id ="login_form" method="post" enctype="multipart/form-data" style="opacity: 1;">
+            <h1 class="text-center" >Create Post</h1>
+            {% csrf_token %}
+            <br>
+            {{ post_form.title }}
+            <br>
+            {{ post_form.text }}
+            <br>
+            <p class="" >Upload Post Image:</p>
+            {{ post_form.image }} <br> <br>
+            {{post_form.errors}}
+            {{post_form.non_field_errors}}
+            <button type="submit" class="btn btn-secondary">Submit Post
+            <br> </button>
+            <br>
+            <br>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+<h1 class="text-center"> You are not authorized to create a news post.</h1>
+{% endif %}
+
+{% if not user.is_authenticated %}
+<h1 class="" >Please login to create a post.</h1>
+{% endif %}
+
+{% endblock %}
